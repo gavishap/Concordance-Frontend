@@ -1,0 +1,28 @@
+/* src/pages/HomePage.css */
+    nav ul {
+    list-style-type: none;
+        padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    color: black; /* Added color property to make the text visible */
+    font-weight: bold; /* Added font-weight property to make the text bold */
+  }
+  
+    nav ul li {
+    display: inline-block;
+    margin: 0 20px; /* Adjust the left and right margins as needed */
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    color: black;
+    border: 1px solid #000; /* Added border property to separate the squares */
+    box-sizing: border-box; /* Added box-sizing property to include the border in the element's total width and height */
+  }
+  
+    nav ul li:hover {
+    background-color: #e9ecef;
+    }
+  
