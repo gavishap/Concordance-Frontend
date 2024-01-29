@@ -38,17 +38,16 @@ const WordsList = ({ onWordSelect, filters }: WordsListProps) => {
         const fetchWords = async () => {
             if (formatFilters()?.includes('=')) {
                 try {
-                    const res = await fetch(`http://127.0.0.1:5000/words${formatFilters()}`);
+                    const res = await fetch(`http://localhost:5000/words${formatFilters()}`);
                     const data = await res.json();
+                    // data from database
+                    console.log("Data: ",data)
 
-                    setWords([JSON.stringify(data)]);
+                    setWords([...data]);
                 } catch (error) {
-                    console.error('Error fetching words:', error);
-                    setWords(['Error fetching words']);
+                    alert('Error occured when fetching Words try again !!!')
                 }
-            } else {
-                setWords(['No filters selected']);
-            }
+            } 
         };
         fetchWords();
         // rest of your code
@@ -57,12 +56,11 @@ const WordsList = ({ onWordSelect, filters }: WordsListProps) => {
 
     return (
         <div className="words-list-container">
-            <h2>Word List : {words.toString()}</h2>
-            {/* <InfiniteScroll
+            <InfiniteScroll
                 dataLength={words.length}
                 next={() => setPage(prevPage => prevPage + 1)}
                 hasMore={hasMore}
-                loader={<h4>Loading...</h4>}
+                loader={<h4>Loading ...</h4>}
                 endMessage={<p>No more words!</p>}
                 className="scrollable-words-list"
             >
@@ -71,7 +69,7 @@ const WordsList = ({ onWordSelect, filters }: WordsListProps) => {
                         {word}
                     </button>
                 ))}
-            </InfiniteScroll> */}
+            </InfiniteScroll> 
         </div>
     );
 };
