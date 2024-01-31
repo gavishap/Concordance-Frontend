@@ -46,10 +46,11 @@ const DocumentPage = () => {
 
   return (
     <div className="document-page-container">
-      <button type="button" onClick={() => navigate("/")}>Back</button>
+
       <h2>Upload a Document</h2>
       <DocumentUploader onFileSelect={onFileSelect} />
       {selectedFile && <FileMetadataForm onSubmit={handleMetadataSubmit} />}
+      <button type="button" onClick={() => navigate("/")}>Back</button>
     </div>
   );
 };

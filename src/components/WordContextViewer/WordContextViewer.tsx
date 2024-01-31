@@ -1,5 +1,5 @@
 // WordContextViewer.tsx
-import React, { useState, useEffect,useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './WordContextViewer.css';
 
 interface FilterStructure {
@@ -17,7 +17,7 @@ interface WordContextViewerProps {
     filters: FilterStructure;
 }
 
-interface WordContextResponse{
+interface WordContextResponse {
     doc_name: string;
     document: string;
     position: string;
@@ -27,6 +27,7 @@ interface WordContextResponse{
 const WordContextViewer = ({ word, filters }: WordContextViewerProps) => {
     const [context, setContext] = useState<WordContextResponse[]>([]);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const [data, setData] = useState<string>("")
 
     const formatFilters = useCallback(() => {
         let str = '?';
@@ -42,17 +43,19 @@ const WordContextViewer = ({ word, filters }: WordContextViewerProps) => {
         const fetchWordsContext = async () => {
             if (formatFilters()?.includes('=')) {
                 try {
-                    const res = await fetch(`http://localhost:5000/word-context?word=${word}&${formatFilters()}`);
+                    const formatedFilters = formatFilters().substring(1, formatFilters().length)
+                    const res = await fetch(`http://localhost:5000/word-context?word=${word}&${formatedFilters}`);
+                    setData(`http://localhost:5000/word-context?word=${word}&${formatedFilters}`)
                     const data = await res.json();
                     // data from database
-                    console.log("Data: ",data)
+                    console.log("Data: ", data)
 
                     setContext([...data])
                     setCurrentIndex(0)
                 } catch (error) {
                     alert('Error occured when fetching Word Context !!!')
                 }
-            } 
+            }
         };
         fetchWordsContext();
         // rest of your code
@@ -70,6 +73,7 @@ const WordContextViewer = ({ word, filters }: WordContextViewerProps) => {
         <div className="word-context-viewer">
             {context.length > 0 ? (
                 <>
+                    <h3>APi Data: {data}</h3>
                     <button type="button" onClick={handlePrev} disabled={currentIndex === 0}>Previous</button>
                     <div className="context-display">
                         {context[currentIndex]?.word}

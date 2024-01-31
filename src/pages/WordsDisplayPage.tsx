@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import WordsList from '../components/WordsList/WordsList';
 import WordContextViewer from '../components/WordContextViewer/WordContextViewer';
 import './WordsDisplayPage.css';
+import { useNavigate } from 'react-router-dom';
 
 interface FilterStructure {
     documentId: string;
@@ -16,8 +17,8 @@ interface FilterStructure {
 
 const WordsDisplayPage = () => {
     const [selectedWord, setSelectedWord] = useState<string>('');
-    const [isWordVisible,setIsWordVisible] = useState<Boolean>(false);
-
+    const [isWordVisible, setIsWordVisible] = useState<Boolean>(false);
+    const navigate = useNavigate();
     const [filters, setFilters] = useState<FilterStructure>({
         documentId: '',
         doc_id: '',
@@ -48,16 +49,20 @@ const WordsDisplayPage = () => {
                 <input name="sentence" placeholder="Sentence" value={filters.sentence} onChange={handleFilterChange} />
                 <input name="lineNumber" placeholder="Line Number" value={filters.lineNumber} onChange={handleFilterChange} />
                 <input name="lineRange" placeholder="Line Range" value={filters.lineRange} onChange={handleFilterChange} />
-    
+
             </div>
 
-            
+
             {isWordVisible ?
-             <WordContextViewer word={selectedWord} filters={filters} />
-            :
-            <WordsList onWordSelect={handleWordSelect} filters={filters} />
+                <WordContextViewer word={selectedWord} filters={filters} />
+                :
+                <WordsList onWordSelect={handleWordSelect} filters={filters} />
             }
+
+            <button type="button" onClick={() => navigate("/")}>Back</button>
         </div>
+
+
     );
 };
 
