@@ -1,12 +1,31 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
 import DocumentPage from './pages/DocumentPage';
 import WordsDisplayPage from './pages/WordsDisplayPage';
+import WordGroup from './pages/WordGroup';
+import WordExpression from './pages/WordExpression';
+import Statistics from './pages/Statistics'
 // Import other pages and components as needed
 
 function App() {
+  const [documentList,setDocumentList] = useState<any[]>([]);
+
+  const fetchDocuments = async ()=>{
+    try{  
+      const res = await fetch("http://localhost:5000/documents")
+      const data = await res.json();
+      setDocumentList([...data]);
+    }catch(e){
+      console.log("Failed to fetch documents",e)
+    }
+  }
+
+  React.useEffect(()=>{
+    fetchDocuments();
+  },[])
+
   return (
     <Router>
       <div className="App">
@@ -18,6 +37,9 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/upload" element={<DocumentPage />} />
             <Route path="/words-display" element={<WordsDisplayPage />} />
+            <Route path="/words-group" element={<WordGroup documents={documentList} />} />
+            <Route path='/words-expressions' element={<WordExpression documents={documentList} />} />
+            <Route path='/stats' element={<Statistics />} />
           </Routes>
         </main>
         <footer>

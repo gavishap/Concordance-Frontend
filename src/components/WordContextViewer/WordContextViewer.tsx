@@ -19,15 +19,15 @@ interface WordContextViewerProps {
 
 interface WordContextResponse {
     doc_name: string;
-    document: string;
-    position: string;
+    sentence_no:Number;
+    paragraph_no: Number;
     word: string;
+    context_paragraph: string;
 }
 
 const WordContextViewer = ({ word, filters }: WordContextViewerProps) => {
     const [context, setContext] = useState<WordContextResponse[]>([]);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const [data, setData] = useState<string>("")
 
     const formatFilters = useCallback(() => {
         let str = '?';
@@ -37,7 +37,12 @@ const WordContextViewer = ({ word, filters }: WordContextViewerProps) => {
             }
         }
         return str.substring(0, str.length - 1);
-    }, [filters]);
+    }, [filters])
+   
+
+    const sortData=(data:WordContextResponse[])=>{
+        
+    }
 
     useEffect(() => {
         const fetchWordsContext = async () => {
@@ -45,10 +50,7 @@ const WordContextViewer = ({ word, filters }: WordContextViewerProps) => {
                 try {
                     const formatedFilters = formatFilters().substring(1, formatFilters().length)
                     const res = await fetch(`http://localhost:5000/word-context?word=${word}&${formatedFilters}`);
-                    setData(`http://localhost:5000/word-context?word=${word}&${formatedFilters}`)
                     const data = await res.json();
-                    // data from database
-                    console.log("Data: ", data)
 
                     setContext([...data])
                     setCurrentIndex(0)
@@ -62,23 +64,40 @@ const WordContextViewer = ({ word, filters }: WordContextViewerProps) => {
     }, [formatFilters]);
 
     const handlePrev = () => {
-        setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+        setCurrentIndex((currentIndex:number) => currentIndex -1);
     };
 
     const handleNext = () => {
-        setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, context.length - 1));
+        setCurrentIndex((currentIndex:number) =>  currentIndex+1);
     };
+
+    const formatResponse = (data: string)=>{
+        let str = ``;
+        data.split(" ")
+            .forEach((wordIndex:string)=> {
+                
+            })
+
+        return str;
+    }
 
     return (
         <div className="word-context-viewer">
             {context.length > 0 ? (
                 <>
-                    <h3>APi Data: {data}</h3>
-                    <button type="button" onClick={handlePrev} disabled={currentIndex === 0}>Previous</button>
+                    <button type="button" className='btn-next' onClick={()=>handlePrev()} disabled={currentIndex === 0}>Previous</button>
                     <div className="context-display">
-                        {context[currentIndex]?.word}
+                        {
+                            context[currentIndex]?.context_paragraph.split(" ")
+                            .map((wordIndex: string)=>{
+                                return(
+                                    wordIndex === word ? <span style={{backgroundColor: 'red',color: 'white'}}>{wordIndex}</span>
+                                        : <span>{" "+wordIndex+" "}</span>
+                                )
+                            })
+                        }
                     </div>
-                    <button type="button" onClick={handleNext} disabled={currentIndex === context.length - 1}>Next</button>
+                    <button type="button" className='btn-next' onClick={()=>handleNext()} disabled={currentIndex === context.length - 1}>Next</button>
                 </>
             ) : (
                 <p>Select a word to view its context.</p>

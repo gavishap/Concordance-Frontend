@@ -59,7 +59,7 @@ const WordsDisplayPage = () => {
                 <WordsList onWordSelect={handleWordSelect} filters={filters} />
             }
 
-            <button type="button" onClick={() => navigate("/")}>Back</button>
+            <button type="button" onClick={() => navigate("/")} className='word-item'>{"<< "}Back</button>
         </div>
 
 

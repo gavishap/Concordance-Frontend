@@ -12,9 +12,9 @@ function HomePage() {
         <ul>
           <li><Link to="/upload">Upload Documents</Link></li>
           <li><Link to="/words-display">Display Words</Link></li>
-          <li>Manage Word Groups</li>
-          <li>Manage Expressions</li>
-          <li>Display Statistics</li>
+          <li><Link to="/words-group">Manage Word Groups</Link></li>
+          <li><Link to="/words-expressions">Manage Expressions</Link></li>
+          <li><Link to="/stats">Display Statistics</Link></li>
         </ul>
       </nav>
       <main>
