@@ -15,6 +15,7 @@ function HomePage() {
           <li><Link to="/words-group">Manage Word Groups</Link></li>
           <li><Link to="/words-expressions">Manage Expressions</Link></li>
           <li><Link to="/stats">Display Statistics</Link></li>
+          <li><Link to="/data-mining">Data Mining</Link></li>
         </ul>
       </nav>
       <main>

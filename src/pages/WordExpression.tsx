@@ -234,7 +234,7 @@ useEffect(()=>{
                                 </div>
 
                                 <div>
-                                    <label style={{fontWeight:'bold'}}>Select Document:</label><br />
+                                    <label style={{fontWeight:'bold'}}>Search Word:</label><br />
                                     <input type='text'
                                     onChange={filterDocWords}
                                     value={search}

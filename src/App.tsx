@@ -7,6 +7,7 @@ import WordsDisplayPage from './pages/WordsDisplayPage';
 import WordGroup from './pages/WordGroup';
 import WordExpression from './pages/WordExpression';
 import Statistics from './pages/Statistics'
+import DataMining from './pages/DataMining';
 // Import other pages and components as needed
 
 function App() {
@@ -39,7 +40,8 @@ function App() {
             <Route path="/words-display" element={<WordsDisplayPage />} />
             <Route path="/words-group" element={<WordGroup documents={documentList} />} />
             <Route path='/words-expressions' element={<WordExpression documents={documentList} />} />
-            <Route path='/stats' element={<Statistics />} />
+            <Route path='/stats' element={<Statistics documents={documentList} />} />
+            <Route path='/data-mining' element={<DataMining documents={documentList} />} />
           </Routes>
         </main>
         <footer>
