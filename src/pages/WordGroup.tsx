@@ -215,6 +215,7 @@ async function fetchWordGroups(){
                                     })
                                  }
                                 }>
+                                    <option disabled>Select group</option>
                                     {
                                         groupsList?.map((item:any,index:any)=>{
                                             return(

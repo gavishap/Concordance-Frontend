@@ -69,6 +69,7 @@ export default function Statistics({ documents }: any) {
           const obj = documents.find((item: any, index: number) => item?.name === str);
           setSelectedDoc(obj)
         }}>
+          <option disabled>choose document</option>
           {
             documents?.map((doc: any, index: number) => {
               return (

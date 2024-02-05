@@ -1,6 +1,15 @@
 .document-page-container {
     padding: 20px;
   }
+  .word-items {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
   
   /* Add more styles as needed */
   

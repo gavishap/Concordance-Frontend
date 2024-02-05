@@ -36,6 +36,7 @@ const DocumentPage = () => {
       try {
         const response = await axios.post('http://localhost:5000/upload', formData);
         console.log(response.data);
+        alert("File uploaded successfully !!!")
         // Handle the response from the server, such as displaying a success message
       } catch (error) {
         console.error('Error uploading the document:', error);
@@ -50,7 +51,9 @@ const DocumentPage = () => {
       <h2>Upload a Document</h2>
       <DocumentUploader onFileSelect={onFileSelect} />
       {selectedFile && <FileMetadataForm onSubmit={handleMetadataSubmit} />}
-      <button type="button" onClick={() => navigate("/")}>Back</button>
+
+      <button type="button" style={{backgroundColor:'darkred'}} className='word-items' 
+      onClick={() => navigate("/")}>{"<<  "}Back</button>
     </div>
   );
 };

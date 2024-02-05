@@ -26,7 +26,7 @@ const DocumentUploader = ({ onFileSelect }: { onFileSelect: (file: File) => void
         ) : (
           <p>Drag 'n' drop some files here, or use the button to select files</p>
         )}
-        <button type="button" onClick={open}>Select Files</button>
+        <button type="button"  className='word-items'  onClick={open}>Select Files</button>
         {selectedFile && (
           <div>
             <p>Selected file: {fileName}</p>

@@ -216,6 +216,7 @@ useEffect(()=>{
                                     const obj = documents.find((item:any,index:number)=> item?.name === str);
                                     setSelectedDoc(obj)
                                 }}>
+                                    <option disabled>Select document</option>
                                     {
                                         documents?.map((doc:any,index:number)=>{
                                             return(

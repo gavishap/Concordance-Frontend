@@ -65,6 +65,7 @@ export default function DataMining({ documents }: any) {
           const obj = documents.find((item: any, index: number) => item?.name === str);
           setSelectedDoc(obj)
         }}>
+          <option disabled>Select group</option>
           {
             documents?.map((doc: any, index: number) => {
               return (
